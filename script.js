@@ -14,9 +14,10 @@ var rects = [
   , []
   , []
 ];
+var modal = document.getElementById('modal');
 
 var randomNumber = () => {
-  return Math.random() * 15;
+  return Math.random() * 10;
 }
 
 var randomColors = [
@@ -54,11 +55,13 @@ function createRect(left, top, fillColor, width, height, index){
 function moveRect(rect){
   canvas.add(rect);
   var direction = rect.direction;
-  var factor = randomNumber();
+  if (!rect.topFactor) rect.topFactor = randomNumber();
+  if (!rect.leftFactor) rect.leftFactor = randomNumber();
+  // var factor = randomNumber();
   var left = rect.get('left').toString();
   var top = rect.get('top').toString();
-  var l = rect.direction.left ? eval(left + direction.left + factor) : left;
-  var t = rect.direction.top ? eval(top + direction.top + factor) : top;
+  var l = rect.direction.left ? eval(left + direction.left + rect.leftFactor) : left;
+  var t = rect.direction.top ? eval(top + direction.top + rect.topFactor) : top;
   rect.set({
     left: l,
     top: t
@@ -181,6 +184,7 @@ function renderImages(){
         },
         onComplete: function(){
           console.log('complete');
+          modal.style = "display:block;height:20px";
           // open modal
         }
       });
@@ -269,7 +273,7 @@ function setImage(obj){
           resolve({val: val, rc: rc});
         }).then(function(o){
           createRect(obj.posX, o.val, o.rc, particleSize, particleSize, obj.idx);
-        })
+        });
       }
     }
     if (obj.text){

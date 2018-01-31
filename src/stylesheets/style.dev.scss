@@ -1,0 +1,39 @@
+// @mixin for-phone-only {
+//   @media (max-width: 599px) { @content; }
+// }
+// @mixin for-tablet-portrait-up {
+//   @media (min-width: 600px) { @content; }
+// }
+// @mixin for-tablet-landscape-up {
+//   @media (min-width: 900px) { @content; }
+// }
+// @mixin for-desktop-up {
+//   @media (min-width: 1200px) { @content; }
+// }
+// @mixin for-big-desktop-up {
+//   @media (min-width: 1800px) { @content; }
+// }
+
+@font-face {
+  font-family: "Emulogic";
+  src: url(../assets/fonts/emulogic.ttf);
+}
+
+body {
+  font-family: 'Emulogic', sans-serif;
+}
+
+#star-system {
+    // border: 1px solid red;
+  // @include for-desktop-up {
+  // }
+}
+
+div#modal {
+  display: none;
+  border: 1px solid red;
+  width: 98vw;
+  position: absolute;
+  top: 50vh;
+  background-color: white;
+}
