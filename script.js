@@ -3,12 +3,13 @@ var w = document.documentElement.clientWidth - 10;
 var h = document.documentElement.clientHeight - 10;
 var imgScale;
 var subtitleSize;
+var particleSize;
+
 var imageObjs = [];
 var shipObj;
 var bottomLimit;
 var targetXLimits = [];
-var particleSize;
-var numberOfParticles = 30;
+var numberOfParticles = 15;
 var rects = [
   []
   , []
@@ -17,7 +18,7 @@ var rects = [
 var modal = document.getElementById('modal');
 
 var randomNumber = () => {
-  return Math.random() * 10;
+  return Math.random() * 5;
 }
 
 var randomColors = [
@@ -26,18 +27,39 @@ var randomColors = [
   , '#F8FF00'
 ];
 
+// var directions = [
+//   {left: '-', top: ''}
+//   , {left: '-', top: '-'}
+//   , {left: '', top: '-'}
+
+//   , {left: '+', top: '-'}
+//   , {left: '+', top: ''}
+//   , {left: '+', top: '+'}
+
+//   , {left: '', top: '+'}
+//   , {left: '-', top: '+'}
+// ];
+
 var directions = [
-  {left: '-', top: ''}
-  , {left: '-', top: '-'}
-  , {left: '', top: '-'}
+  {left: subtractNumbers, top: null}
+  , {left: subtractNumbers, top: subtractNumbers}
+  , {left: null, top: subtractNumbers}
 
-  , {left: '+', top: '-'}
-  , {left: '+', top: ''}
-  , {left: '+', top: '+'}
+  , {left: addNumbers, top: subtractNumbers}
+  , {left: addNumbers, top: null}
+  , {left: addNumbers, top: addNumbers}
 
-  , {left: '', top: '+'}
-  , {left: '-', top: '+'}
+  , {left: null, top: addNumbers}
+  , {left: subtractNumbers, top: addNumbers}
 ];
+
+function addNumbers(num1, num2){
+  return num1 + num2;
+}
+
+function subtractNumbers(num1, num2){
+  return num1 - num2;
+}
 
 function createRect(left, top, fillColor, width, height, index){
   var rect = new fabric.Rect({
@@ -58,10 +80,14 @@ function moveRect(rect){
   if (!rect.topFactor) rect.topFactor = randomNumber();
   if (!rect.leftFactor) rect.leftFactor = randomNumber();
   // var factor = randomNumber();
-  var left = rect.get('left').toString();
-  var top = rect.get('top').toString();
-  var l = rect.direction.left ? eval(left + direction.left + rect.leftFactor) : left;
-  var t = rect.direction.top ? eval(top + direction.top + rect.topFactor) : top;
+  var left = rect.get('left');
+  var top = rect.get('top');
+
+
+  // var l = rect.direction.left ? eval(left + direction.left + rect.leftFactor) : left;
+  // var t = rect.direction.top ? eval(top + direction.top + rect.topFactor) : top;
+  var l = rect.direction.left ? rect.direction.left(left, rect.leftFactor) : left;
+  var t = rect.direction.top ? rect.direction.top(top, rect.topFactor) : top;
   rect.set({
     left: l,
     top: t
@@ -156,7 +182,7 @@ function renderImages(){
       fabric.util.animate({
         startValue: startPoints[0].y,
         endValue: 0,
-        duration: 1 * 1000,
+        duration: 1.5 * 1000,
         onChange: function(value){
           polyline.setPositionByOrigin(new fabric.Point(x, value), 'center', 'bottom');
           var betweenX = false;
@@ -184,7 +210,7 @@ function renderImages(){
         },
         onComplete: function(){
           console.log('complete');
-          modal.style = "display:block;height:20px";
+          document.querySelector('#modal').style = "height:80vh";
           // open modal
         }
       });

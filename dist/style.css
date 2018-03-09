@@ -2,14 +2,18 @@
   font-family: "Emulogic";
   src: url(../assets/fonts/emulogic.ttf); }
 body {
-  font-family: 'Emulogic', sans-serif; }
+  font-family: 'Emulogic', sans-serif;
+}
 
 div#modal {
-  display: none;
-  border: 1px solid red;
+/*  border: 1px solid red;*/
   width: 98vw;
   position: absolute;
-  top: 50vh;
-  background-color: white; }
+  top: 10vh;
+  background-color: white;
+  height: 0px;
+  -webkit-transition: height 4s;
+  transition: height 1s;
+}
 
 /*# sourceMappingURL=style.css.map */
