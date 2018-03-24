@@ -16,6 +16,7 @@ var rects = [
   , []
 ];
 var modal = document.getElementById('modal');
+var hitIndex;
 
 var randomNumber = () => {
   return Math.random() * 5;
@@ -136,7 +137,7 @@ function sizeWindow(){
       break;
     default:
       console.log('x-large');
-      imgScale = 0.2;
+      imgScale = 1;
       subtitleSize = 20;
       particleSize = 5;
   }
@@ -187,7 +188,7 @@ function renderImages(){
           polyline.setPositionByOrigin(new fabric.Point(x, value), 'center', 'bottom');
           var betweenX = false;
           var hitShip;
-          var hitIndex;
+          // var hitIndex;
           for (let i = 0; i < targetXLimits.length; i++){
             if (x >= targetXLimits[i].left
               && x <= targetXLimits[i].right
@@ -210,14 +211,21 @@ function renderImages(){
         },
         onComplete: function(){
           console.log('complete');
-          document.querySelector('#modal').style = "height:80vh";
           // open modal
+          document.querySelector('#modal').style = "height:80vh";
+
+          var arrHtmlStr = renderTemplateContent(projectData, projectStr);
+
+          console.log(arrHtmlStr);
+          document.querySelector('#modal').innerHTML = arrHtmlStr.join('');
+
+          // var t = document.querySelector('#projects');
+          // var clone = document.importNode(t.content, true);
+          // document.querySelector('#modal').appendChild(clone);
         }
       });
     }
   });
-
-
 
   setImage({
     name: 'ship'

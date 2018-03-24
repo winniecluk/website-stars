@@ -1,0 +1,112 @@
+@font-face {
+  font-family: "Emulogic";
+  src: url(../assets/fonts/emulogic.ttf); }
+body {
+  font-family: 'Emulogic', sans-serif;
+}
+
+div#modal {
+/*  border: 1px solid red;*/
+  width: 98vw;
+  position: absolute;
+  top: 10vh;
+  background-color: white;
+  height: 80vh;
+  height: 0;
+  -webkit-transition: height 4s;
+  transition: height 1s;
+  font-family: 'Roboto', sans-serif;
+  overflow: scroll;
+}
+
+div.header {
+  display: block;
+  min-height: 3rem;
+  line-height: 3rem;
+  padding: 0 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+div.body {
+/*  border: 1px solid red;*/
+  width: 90vw;
+  margin: 0 auto;
+}
+
+/*div#modal img {
+  display: none;
+}*/
+
+div.col {
+  display: inline-block;
+  margin: 20px 30px;
+  vertical-align: top;
+}
+
+.m3 {
+  width: 30vw;
+}
+
+.m4 {
+  width: 40vw;
+}
+
+h6 {
+  font-size: 1em;
+  margin: 1em;
+}
+
+ul li {
+  list-style-type: circle;
+}
+
+.self {
+  padding: 20px;
+}
+.self div {
+  display: inline-block;
+}
+.self-header {
+  width: 100%;
+  font-size: 1.5rem;
+  padding-bottom: 30px;
+}
+.self-picture {
+  width: 35%;
+  padding: 10px;
+}
+.self-picture img {
+  border-radius:50%;
+  width: 100%;
+}
+.self-details {
+  width: 57%;
+  padding: 10px;
+  vertical-align: top;
+}
+
+@media(max-width:683px){
+/*  .s-min {
+    width: 220px;
+  }
+
+  .s-max {
+    width:;
+  }*/
+}
+
+@media(min-width:1200px){
+  div.body {
+    width: 1000px;
+  }
+  div.col {
+    display: inline-block;
+    margin: 20px 8px;
+    vertical-align: top;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
