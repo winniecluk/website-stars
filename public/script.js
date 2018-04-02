@@ -28,19 +28,6 @@ var randomColors = [
   , '#F8FF00'
 ];
 
-// var directions = [
-//   {left: '-', top: ''}
-//   , {left: '-', top: '-'}
-//   , {left: '', top: '-'}
-
-//   , {left: '+', top: '-'}
-//   , {left: '+', top: ''}
-//   , {left: '+', top: '+'}
-
-//   , {left: '', top: '+'}
-//   , {left: '-', top: '+'}
-// ];
-
 var directions = [
   {left: subtractNumbers, top: null}
   , {left: subtractNumbers, top: subtractNumbers}
@@ -166,7 +153,7 @@ function renderImages(){
   });
 
   canvas.on('mouse:down', function(e){
-    if (shipObj){
+    if (shipObj.fabricImage){
       var y = shipObj.get('top');
       var x = e.e.clientX;
       var startPoints = [
