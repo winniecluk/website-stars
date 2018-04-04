@@ -20,12 +20,57 @@
 
     <canvas id="star-system">
       <!-- content for browsers that do not support canvas -->
-
     </canvas>
     <div id="modal">
     </div>
 
-    <template id="contact">
+    <template id="project-template">
+      <div>
+        <div class="header grey lighten-4">
+          PROJECT_TITLE (PROJECT_START_DATE - PROJECT_END_DATE)
+        </div>
+        <div class="body">
+          <div class="row">
+            <div class="col s-min m3">
+              <img src="IMAGE_HREF" class="s-min m3">
+              <br />
+              <div style="padding-top:28px;">
+                <strong>PROJECT_DESCRIPTION</strong>
+              </div>
+              <br />
+              <div class="links">
+                <a href="PROJECT_HREF"><strong>See the code</strong></a> |
+                <a href="APP_HREF"><strong>Deployed app</strong></a>
+              </div>
+              <div class="team-members">
+                  <h6>Team:</h6>
+                  <ul class="team-member">
+                    <li>#TEAM_MEMBER</li>
+                  </ul>
+              </div>
+            </div>
+
+            <!-- second column -->
+            <div class="col s-max m4">
+              <div class="feature-points">
+                <h6>Features:</h6>
+                <ul class="feature-point">
+                  <li>#FEATURE_POINT</li>
+                </ul>
+              </div>
+              <div class="technologies">
+                <h6>Technologies:</h6>
+                <ul class="technology">
+                  <li>#TECHNOLOGY</li>
+                </ul>
+              </div>
+            </div> <!-- closes column -->
+          </div> <!-- closes row -->
+        </div> <!-- This closes the collapsible-body -->
+      </div>
+    </template>
+
+    <template id="contact-template">
       <div class="container">
         <div class="row">
           <div class="card-panel grey lighten-4">
@@ -48,7 +93,7 @@
     </template>
 
 
-    <template id="about-me">
+    <template id="story-template">
       <div class="self">
         <div class="self-header">
           My Story
@@ -70,8 +115,6 @@
     </template>
 
     <script src="./lib/fabric.min.js"></script>
-    <script src="./template-strings.js"></script>
-    <script src="./project-data.js"></script>
 
     <script src="./util.js"></script>
     <script src="./constants.js"></script>
@@ -81,6 +124,8 @@
     <script src="./Ship.js"></script>
     <script src="./Particle.js"></script>
     <script src="./action.js"></script>
-
+    <script>
+      init();
+    </script>
   </body>
 </html>

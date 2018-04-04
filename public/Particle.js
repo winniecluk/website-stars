@@ -1,12 +1,9 @@
 class Particle extends Image {
 
-  constructor(label, imagePath, selectable, color, dimensions){
+  constructor(label, imagePath, selectable, color, orientation, dimensions){
     // orientation has left and top
     super(label, imagePath, selectable);
-    this.orientation = {
-      left: ''
-      , top: ''
-    };
+    this.orientation = orientation;
     this.color = color;
     this.dimensions = dimensions;
     this.speed = {
@@ -22,31 +19,33 @@ class Particle extends Image {
   }
 
   renderSelf(canvas, cb){
+    canvas.add(this.fabricImage);
+  }
+
+  createImage(){
     var rect = new fabric.Rect({
-      left: this.dimensions.left
-      , top: this.dimensions.top
+      left: this.orientation.left
+      , top: this.orientation.top
       , fill: this.color
       , width: this.dimensions.width
       , height: this.dimensions.height
     });
-    canvas.add(rect);
     this.fabricImage = rect;
-    if (cb) this.move(rect, canvas);
   }
 
   determineSpeed(){
-    this.speed.x = randomNumber(5);
-    this.speed.y = randomNumber(5);
+    this.speed.x = randomNumber(12);
+    this.speed.y = randomNumber(12);
   }
 
-  move(rect, canvas){
-    this.left = this.moveAbility.moveLeft? this.moveAbility.moveLeft(this.orientation.left, this.speed.x) : this.left;
-    this.top = this.moveAbility.moveTop ? this.moveAbility.moveTop(this.orientation.top, this.speed.y) : this.top;
-    rect.set({
-      left: this.left,
-      top: this.top
+  move(canvas){
+    this.orientation.left = this.moveAbility.moveLeft? this.moveAbility.moveLeft(this.orientation.left, this.speed.x) : this.orientation.left;
+    this.orientation.top = this.moveAbility.moveTop ? this.moveAbility.moveTop(this.orientation.top, this.speed.y) : this.orientation.top;
+    this.fabricImage.set({
+      left: this.orientation.left,
+      top: this.orientation.top
     });
-    canvas.renderAll();
+    this.speed.x = this.speed.x * 3;
   }
 
 }

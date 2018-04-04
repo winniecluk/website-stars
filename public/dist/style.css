@@ -5,6 +5,20 @@ body {
   font-family: 'Emulogic', sans-serif;
 }
 
+.hidden {
+  display: none;
+}
+
+div#close-modal{
+  display: inline-block;
+  padding: 4px;
+  font-size: 28px;
+  color: rgb(145,145,145);
+  position: fixed;
+  right: 24px;
+  cursor: pointer;
+}
+
 div#modal {
 /*  border: 1px solid red;*/
   width: 98vw;

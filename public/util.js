@@ -10,6 +10,49 @@ function subtractNumbers(num1, num2){
   return num1 - num2;
 }
 
+function showModal(option){
+  var closeStr = '<div id="close-modal">x</div>';
+  if (option === 'story'){
+    document.querySelector('#modal').innerHTML = closeStr + document.querySelector('#story-template').innerHTML;
+  }
+  else if (option === 'projects'){
+    var projectStr = replaceTemplate();
+    document.querySelector('#modal').innerHTML = closeStr + projectStr;
+  }
+  else if (option === 'contact'){
+    document.querySelector('#modal').innerHTML = closeStr + document.querySelector('#contact-template').innerHTML;
+  }
+  document.querySelector('#modal').style = "height:80vh";
+  document.querySelector('#close-modal').classList.remove('hidden');
+}
+
+function replaceTemplate(){
+  return projectData.map(kv => {
+    var projectStr = document.querySelector('#project-template').innerHTML;
+    for (var key in kv){
+      if ( !Array.isArray(kv[key]) ){
+        projectStr = projectStr.replace(key, kv[key]);
+      } else {
+        if (kv[key].length > 0){
+          var parentUl = document.querySelector('#project-template').content.querySelector(arrayPoints[key]['child']);
+          var childLi = parentUl.firstElementChild.cloneNode(true);
+          var copyParent = parentUl.cloneNode(true);
+          copyParent.innerHTML = '';
+          kv[key].forEach(function(text){
+            childLi.textContent = text;
+            copyParent.innerHTML += childLi.outerHTML;
+          });
+          projectStr = projectStr.replace(parentUl.outerHTML, copyParent.outerHTML);
+        } else {
+          var replaceStr = document.querySelector('#project-template').content.querySelector(arrayPoints[key]['parent']).outerHTML;
+          projectStr = projectStr.replace(replaceStr, '');
+        }
+      }
+    }
+    return projectStr;
+  }).join('');
+}
+
 var renderSelf = function(canvas, cb, cb2, cb3){
   fabric.Image.fromURL(this.imagePath, function(i){
     i.scale(this.scale.img)
@@ -35,6 +78,7 @@ var recordBorderCoordinates = function(i, canvas, monster){
   monster.orientation.right = i.aCoords.br.x;
   monster.orientation.center = (i.aCoords.tl.y + monster.orientation.y) / 2;
   monster.orientation.top = i.top;
+  if (monster.createParticles) monster.createParticles();
 };
 
 var bobble = function(i, canvas, monster){

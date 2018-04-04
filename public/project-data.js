@@ -7,7 +7,7 @@ var projectData = [
     , IMAGE_HREF: './assets/images/screenshot-map.png'
     , PROJECT_HREF: 'http://github.com/winniecluk/zo-map'
     , APP_HREF: 'http://zomap.herokuapp.com'
-    , TEAM_MEMBERS: []
+    , TEAM_MEMBERS: ['Winnie Luk']
     , FEATURE_POINTS: [
         'Users can click on a country on the map to see all artists in that country registered to perform for ZO Magazine.'
         , 'Interested artists can submit their information for approval to work with the magazine.'

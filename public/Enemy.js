@@ -1,5 +1,5 @@
 class Enemy extends Image {
-  constructor(label, imagePath, selectable, orientConfig, titleConfig, bobbleConfig){
+  constructor(label, imagePath, selectable, orientConfig, titleConfig, bobbleConfig, option){
 
     super(label, imagePath, selectable);
     this.orientation = {
@@ -18,11 +18,15 @@ class Enemy extends Image {
     // caption image
     this.caption;
 
+    // content correlation
+    this.option = option;
+
     // title
     this.titleConfig = titleConfig;
     this.particles = [];
     this.bobbleConfig = bobbleConfig;
     this.fabricImage;
+    this.exploded = false;
   }
 
   renderTitle(canvas){
@@ -45,14 +49,10 @@ class Enemy extends Image {
     this.caption = caption;
   }
 
-  explode(canvas){
-    console.log('exploding');
-    canvas.remove(this.fabricImage);
+  createParticles(){
     var numParticles = this.scale.numParticles;
-    console.log('this');
     var self = this;
     for (let i = 0; i < numParticles; i++){
-      console.log('creating each particle');
       var p = new Particle(
         'particle'
         , ''
@@ -61,15 +61,40 @@ class Enemy extends Image {
         , {
           left: self.orientation.x
           , top: self.orientation.center
-          , width: self.scale.particleSize
+        }
+        , {
+          width: self.scale.particleSize
           , height: self.scale.particleSize
           }
         );
-        p.determineSpeed();
-        p.renderSelf(canvas, true);
-        self.particles.push(p);
+      p.determineSpeed();
+      p.createImage();
+      self.particles.push(p);
     }
   }
+
+  explode(canvas){
+    if (!this.exploded){
+      var self = this;
+      canvas.remove(this.fabricImage);
+      this.particles.forEach(particle => {
+        particle.renderSelf(canvas, true);
+      });
+      var intervalId = window.setInterval(() => {
+        this.particles.forEach(particle => {
+          particle.move(canvas);
+        });
+        canvas.renderAll();
+      }, 100);
+      var timeoutId = window.setTimeout(function(){
+        clearTimeout(intervalId);
+        clearTimeout(timeoutId);
+        showModal(self.option);
+      }, 1 * 300);
+      this.exploded = true;
+    }
+  }
+
 }
 
 Object.assign(Enemy.prototype, mixin);

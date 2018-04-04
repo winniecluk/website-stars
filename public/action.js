@@ -4,49 +4,96 @@ var h = document.documentElement.clientHeight - 10;
 window.onresize = function(){
   w = document.documentElement.clientWidth - 10;
   h = document.documentElement.clientHeight - 10;
+  rerender();
 }
 
-canvas = new fabric.Canvas('star-system', {
-    width: w,
-    height: h
-});
+function hideModal(){
+  document.querySelector('#modal').innerHTML = '';
+  document.querySelector('#modal').style = "height:0";
+  rerender();
+}
 
-var monsterLeft = new Enemy(
-  'monster-left'
-  , 'assets/images/monster-red.png'
-  , false
-  , { x: 'center', y: 'bottom', xDivision: 1/4, yDivision: 1/2 }
-  , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Story'}
-  , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 1}
-);
+function rerender(){
+  var starSystem = document.querySelector('#star-system');
+  var body = document.querySelector('body');
+  if (starSystem){
+    starSystem.parentNode.removeChild(starSystem);
+    var newCanvas = document.createElement('canvas');
+    newCanvas.setAttribute('id', 'star-system');
+    body.insertBefore(newCanvas, body.children[0]);
+    init();
+  }
+}
 
-var monsterCenter = new Enemy(
-  'monster-center'
-  , 'assets/images/monster-green.png'
-  , true
-  , { x: 'center', y: 'bottom', xDivision: 2/4, yDivision: 1/2 }
-  , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Projects'}
-  , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 2}
-);
+function init(){
+  canvas = new fabric.Canvas('star-system', {
+      width: w,
+      height: h
+  });
 
-var monsterRight = new Enemy(
-  'monster-center'
-  , 'assets/images/monster-yellow.png'
-  , false
-  , { x: 'center', y: 'bottom', xDivision: 3/4, yDivision: 1/2 }
-  , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Contact'}
-  , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 0}
-);
+  var monsterLeft = new Enemy(
+    'monster-left'
+    , 'assets/images/monster-red.png'
+    , false
+    , { x: 'center', y: 'bottom', xDivision: 1/4, yDivision: 1/2 }
+    , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Story'}
+    , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 1}
+    , 'story'
+  );
 
-var userShip = new Ship(
-  'ship'
-  , 'assets/images/ship-white.png'
-  , false
-  , { x: 'center', y: 'bottom', xDivision: 1/2, yDivision: 1}
-  , { stroke: 'rgb(0,255,58)', strokeWidth: 5, selectable: false}
-);
+  var monsterCenter = new Enemy(
+    'monster-center'
+    , 'assets/images/monster-green.png'
+    , true
+    , { x: 'center', y: 'bottom', xDivision: 2/4, yDivision: 1/2 }
+    , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Projects'}
+    , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 2}
+    , 'projects'
+  );
 
-var monstersArr = [monsterLeft, monsterCenter, monsterRight];
+  var monsterRight = new Enemy(
+    'monster-center'
+    , 'assets/images/monster-yellow.png'
+    , false
+    , { x: 'center', y: 'bottom', xDivision: 3/4, yDivision: 1/2 }
+    , { stroke: 'white', fill: 'white', fontFamily: 'Emulogic', content: 'Contact'}
+    , { bobbleDirection: 'top', bobbleMagnitude: '+=15', bobbleDelay: 0}
+    , 'contact'
+  );
+
+  var userShip = new Ship(
+    'ship'
+    , 'assets/images/ship-white.png'
+    , false
+    , { x: 'center', y: 'bottom', xDivision: 1/2, yDivision: 1}
+    , { stroke: 'rgb(0,255,58)', strokeWidth: 5, selectable: false}
+  );
+
+  var monstersArr = [monsterLeft, monsterCenter, monsterRight];
+
+  renderMonsters(monstersArr);
+  userShip.determineSize(w);
+  userShip.determineCoordinates(w, h);
+  userShip.renderSelf(canvas, recordBorderCoordinates);
+
+  canvas.on('mouse:move', function(e){
+    if (userShip){
+      userShip.move(e.e.clientX);
+    }
+  });
+
+  canvas.on('mouse:down', function(e){
+    if (userShip){
+      userShip.fire(canvas, e.e.clientX, monstersArr);
+    }
+  })
+}
+
+document.addEventListener('click', function(e){
+  if (e.target.id === 'close-modal'){
+    hideModal();
+  }
+})
 
 function renderMonsters(monstersArr){
   monstersArr.forEach(function(monster){
@@ -56,21 +103,4 @@ function renderMonsters(monstersArr){
     monster.renderTitle(canvas);
   })
 }
-
-renderMonsters(monstersArr);
-userShip.determineSize(w);
-userShip.determineCoordinates(w, h);
-userShip.renderSelf(canvas, recordBorderCoordinates);
-
-canvas.on('mouse:move', function(e){
-  if (userShip){
-    userShip.move(e.e.clientX);
-  }
-});
-
-canvas.on('mouse:down', function(e){
-  if (userShip){
-    userShip.fire(canvas, e.e.clientX, monstersArr);
-  }
-})
 
