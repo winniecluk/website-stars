@@ -9,31 +9,41 @@ const enemyScale = {
     img: 0.4,
     title: 12,
     numParticles: 10,
-    particleSize: 10
+    particleSize: 10,
+    starSize: 2,
+    numStars: 20
   },
   small: {
     img: 0.6,
     title: 20,
     numParticles: 10,
-    particleSize: 10
+    particleSize: 10,
+    starSize: 2,
+    numStars: 20
   },
   medium: {
     img: 0.8,
     title: 26,
     numParticles: 18,
-    particleSize: 10
+    particleSize: 10,
+    starSize: 2,
+    numStars: 20
   },
   large: {
     img: 0.8,
     title: 26,
     numParticles: 18,
-    particleSize: 15
+    particleSize: 15,
+    starSize: 2,
+    numStars: 10
   },
   x_large: {
     img: 1,
     title: 26,
     numParticles: 18,
-    particleSize: 15
+    particleSize: 15,
+    starSize: 2,
+    numStars: 10
   }
 };
 
@@ -193,7 +203,7 @@ const projectData = [
   , {
   LINK_HREF: '#titans'
   , LINK_NAME: 'titans'
-  , PROJECT_TITLE: 'Tic Tac Titans'
+  , PROJECT_TITLE: 'Tic Tac Titan'
   , PROJECT_START_DATE: '08/20/16'
   , PROJECT_END_DATE: '08/21/16'
   , PROJECT_DESCRIPTION: 'My first ever exercise in JavaScript. I\'m including it here to show my progress in a few months\' time, from hard-coding every step in this exercise to now writing more generalized, reusable code.'

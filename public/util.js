@@ -2,6 +2,10 @@ var randomNumber = (num) => {
   return Math.floor(Math.random() * num);
 }
 
+var randomNumberRange = (min, max) => {
+  return Math.random() * (max - min) + min;
+}
+
 var randomFloat = (num) => {
   return Math.random() * num;
 }

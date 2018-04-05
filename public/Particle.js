@@ -14,12 +14,16 @@ class Particle extends Image {
     this.fabricImage;
   }
 
-  changeColor(){
-    this.color = particleColors[randomNumber(particleColors.length)];
+  changeColor(arr, canvas){
+    this.color = arr[randomNumber(arr.length)];
+    this.fabricImage.set({
+      fill: this.color
+    });
   }
 
   renderSelf(canvas, cb){
     canvas.add(this.fabricImage);
+    canvas.sendToBack(this.fabricImage);
   }
 
   createImage(){

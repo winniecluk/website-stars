@@ -74,6 +74,7 @@ function init(){
   userShip.determineSize(w);
   userShip.determineCoordinates(w, h);
   userShip.renderSelf(canvas, recordBorderCoordinates);
+  renderStars(w, h, canvas);
 
   canvas.on('mouse:move', function(e){
     if (userShip){
@@ -105,5 +106,37 @@ function renderMonsters(monstersArr){
     monster.renderSelf(canvas, bobble, recordBorderCoordinates);
     monster.renderTitle(canvas);
   })
+}
+
+function renderStars(w, h, canvas){
+  var img = new Image('', '', false);
+  img.determineSize(w);
+  var scale = img.scale;
+  console.log(scale);
+
+  for (let i = 0; i < scale.numStars; i++){
+    var p = new Particle(
+      'star'
+      , ''
+      , false
+      , 'white'
+      , {
+        left: randomNumber(w),
+        top: randomNumber(h)
+      }
+      , {
+        width: scale.starSize,
+        height: scale.starSize
+      }
+    );
+    p.createImage();
+    p.renderSelf(canvas);
+    setInterval(function(){
+      p.changeColor(['black', 'white'], canvas);
+    }, randomNumberRange(5, 10) * 1000);
+  }
+  setInterval(function(){
+    canvas.renderAll();
+  }, 1000);
 }
 
