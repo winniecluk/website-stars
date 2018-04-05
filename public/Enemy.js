@@ -107,7 +107,7 @@ class Enemy extends Image {
     });
     this.createParticles();
     canvas.add(this.fabricImage);
-    canvas.sendBackwards(this.fabricImage);
+    canvas.sendToBack(this.fabricImage);
   }
 
 }
