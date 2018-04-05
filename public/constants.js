@@ -8,32 +8,32 @@ const enemyScale = {
   x_small: {
     img: 0.4,
     title: 12,
-    numParticles: 8,
-    particleSize: 5
+    numParticles: 10,
+    particleSize: 10
   },
   small: {
     img: 0.6,
     title: 20,
-    numParticles: 8,
-    particleSize: 8
+    numParticles: 10,
+    particleSize: 10
   },
   medium: {
     img: 0.8,
     title: 26,
-    numParticles: 8,
-    particleSize: 8
+    numParticles: 18,
+    particleSize: 10
   },
   large: {
     img: 0.8,
     title: 26,
-    numParticles: 8,
-    particleSize: 5
+    numParticles: 18,
+    particleSize: 15
   },
   x_large: {
     img: 1,
     title: 26,
-    numParticles: 8,
-    particleSize: 5
+    numParticles: 18,
+    particleSize: 15
   }
 };
 
@@ -52,14 +52,60 @@ var directions = [
 
 const projectData = [
   {
-    PROJECT_TITLE: 'ZO Map'
+    LINK_HREF: '#metro'
+    , LINK_NAME: 'metro'
+    , PROJECT_TITLE: 'Let\'s Go Metro'
+    , PROJECT_START_DATE: '06/30/17'
+    , PROJECT_END_DATE: '07/23/17'
+    , PROJECT_DESCRIPTION: 'A mobile application that notifies the user when her bus or train is leaving and arriving'
+    , IMAGE_HREF: './assets/images/screenshot-metro.png'
+    , PROJECT_HREF: 'https://github.com/winniecluk/letsGoMetro'
+    , APP_HREF: []
+    , TEAM_MEMBERS: ['Carol Gonzalez', 'Winnie Luk', 'Valeriia Tischenko']
+    , FEATURE_POINTS: [
+        'Users can submit the address of their destination to get directions to their closest transit stop and the most expedient route and transfers.'
+        , 'They can see estimated departure and arrival times of each stop.'
+        , 'The application notifies them 5 minutes before the departure of each stop.'
+      ]
+    , TECH_POINTS: [
+      'React Native'
+      , 'React Native Maps'
+      , 'Node.js'
+      , 'InVision'
+    ]
+  }
+  , {
+    LINK_HREF: '#ballparq'
+    , LINK_NAME: 'ballparq'
+    , PROJECT_TITLE: 'Ballparq'
+    , PROJECT_START_DATE: '12/14/16'
+    , PROJECT_END_DATE: '01/12/17'
+    , PROJECT_DESCRIPTION: 'An interactive tool for startups to create financial models'
+    , IMAGE_HREF: './assets/images/screenshot-ballparq.png'
+    , PROJECT_HREF: 'https://github.com/winniecluk/ballparq-example'
+    , APP_HREF: 'https://ballparq.herokuapp.com/#/particles'
+    , TEAM_MEMBERS: ['Andy Anderson', 'Clarissa Bitar', 'Troy Carson', 'Victoria Kurzweg', 'Winnie Luk']
+    , FEATURE_POINTS: [
+        'Users enter relevant data points to generate a financial model to present to potential investors in their startup.'
+        , 'They can adjust their inputs on sliders and receive a data visualization of their user retention and loss rate.'
+      ]
+    , TECH_POINTS: [
+      'AngularJS (1.5)'
+      , 'Canvas'
+      , 'Gulp'
+    ]
+  }
+  , {
+    LINK_HREF: '#zo'
+    , LINK_NAME: 'zo'
+    , PROJECT_TITLE: 'ZO Map'
     , PROJECT_START_DATE: '10/31/16'
     , PROJECT_END_DATE: '11/04/16'
     , PROJECT_DESCRIPTION: 'An interactive map for a magazine aiming to host a global live arts performance event'
     , IMAGE_HREF: './assets/images/screenshot-map.png'
     , PROJECT_HREF: 'http://github.com/winniecluk/zo-map'
     , APP_HREF: 'http://zomap.herokuapp.com'
-    , TEAM_MEMBERS: []
+    , TEAM_MEMBERS: ['Winnie Luk']
     , FEATURE_POINTS: [
         'Users can click on a country on the map to see all artists in that country registered to perform for ZO Magazine.'
         , 'Interested artists can submit their information for approval to work with the magazine.'
@@ -74,7 +120,9 @@ const projectData = [
     ]
   }
   , {
-    PROJECT_TITLE: 'LArk'
+    LINK_HREF: '#lark'
+    , LINK_NAME: 'lark'
+    , PROJECT_TITLE: 'LArk'
     , PROJECT_START_DATE: '10/10/16'
     , PROJECT_END_DATE: '10/14/16'
     , PROJECT_DESCRIPTION: 'A mobile-friendly web app to enable drivers around Los Angeles to share parking tips'
@@ -100,7 +148,9 @@ const projectData = [
     ]
   }
   , {
-    PROJECT_TITLE: 'Folio'
+    LINK_HREF: '#folio'
+    , LINK_NAME: 'folio'
+    , PROJECT_TITLE: 'Folio'
     , PROJECT_START_DATE: '09/19/16'
     , PROJECT_END_DATE: '09/23/16'
     , PROJECT_DESCRIPTION: 'Project management and bidding system for translation industry'
@@ -122,7 +172,9 @@ const projectData = [
     ]
   }
   , {
-    PROJECT_TITLE: 'Save Our Spiders'
+    LINK_HREF: '#sos'
+    , LINK_NAME: 'sos'
+    , PROJECT_TITLE: 'Save Our Spiders'
     , PROJECT_START_DATE: '08/29/16'
     , PROJECT_END_DATE: '09/02/16'
     , PROJECT_DESCRIPTION: 'A JavaScript game similar to Whack-A-Mole that trains the user to distinguish between a poisonous spider and a non-poisonous spider'
@@ -139,7 +191,9 @@ const projectData = [
     ]
   }
   , {
-  PROJECT_TITLE: 'Tic Tac Titans'
+  LINK_HREF: '#titans'
+  , LINK_NAME: 'titans'
+  , PROJECT_TITLE: 'Tic Tac Titans'
   , PROJECT_START_DATE: '08/20/16'
   , PROJECT_END_DATE: '08/21/16'
   , PROJECT_DESCRIPTION: 'My first ever exercise in JavaScript. I\'m including it here to show my progress in a few months\' time, from hard-coding every step in this exercise to now writing more generalized, reusable code.'
@@ -171,5 +225,8 @@ const arrayPoints = {
     parent: '.technologies'
     , child: '.technology'
     , content: '#TECHNOLOGY'
+  }
+  , APP_HREF: {
+    parent: 'a[href="APP_HREF"]'
   }
 }

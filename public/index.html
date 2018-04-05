@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#009DBB">
-    <link rel="stylesheet" type="text/css" href="css/materialize.css">
-    <link rel="shortcut icon" href="./assets/images/doge.png" />
+ <link rel="shortcut icon" href="./assets/images/doge.png" />
     <title>Prototype</title>
   </head>
     <style>
@@ -14,40 +13,108 @@
         background-color: black;
       }
     </style>
-    <link rel="stylesheet" href="./dist/style.css" />
   <body>
-
+    <link rel="stylesheet" href="./dist/style.css" />
     <canvas id="star-system">
       <!-- content for browsers that do not support canvas -->
-
     </canvas>
     <div id="modal">
     </div>
 
-    <template id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="card-panel grey lighten-4">
-            <div id="contact-form">
-              <h5>Contact Form</h5>
-              <div class="input-field col s6">
-                <input id="name" type="text" class="validate">
-                <label for="name">Name</label>
+    <template id="header-template">
+      <div id="close-modal">x</div>
+    </template>
+
+    <template id="confirmation-template">
+      <div class="confirm-container">
+        <div id="confirmation">Your message has been submitted.</div>
+        <button id="close-modal">
+          OK
+        </button>
+      </div>
+    </template>
+
+
+    <template id="project-header-template">
+      <a name="top"></a>
+      <div class="project-header">
+        <a href="LINK_HREF">PROJECT_TITLE</a>
+      </div>
+    </template>
+
+    <template id="project-template">
+      <div>
+          <div class="header">
+            <a name="LINK_NAME">PROJECT_TITLE (PROJECT_START_DATE - PROJECT_END_DATE)</a>
+            <span class="top-arrow"><a href="#top">back to top</a></span>
+          </div>
+        <div class="body">
+          <div class="row">
+            <div class="col s-min m3">
+              <img src="IMAGE_HREF" class="s-min m3">
+              <br />
+              <div style="padding-top:28px;">
+                <strong>PROJECT_DESCRIPTION</strong>
               </div>
-              <div class="input-field col s6">
-                <input id="email" type="text" class="validate">
-                <label for="email" data-error="wrong">Email</label>
+              <br />
+              <div class="links">
+                <a href="PROJECT_HREF"><strong>See the code</strong></a> |
+                <a href="APP_HREF"><strong>Deployed app</strong></a>
               </div>
-              <textarea class="materialize-textarea" placeholder="Write to me here!" id="message" required></textarea>
-              <a class="waves-effect waves-light btn submit">Submit</a>
+              <div class="team-members">
+                  <h6>Team:</h6>
+                  <ul class="team-member">
+                    <li>#TEAM_MEMBER</li>
+                  </ul>
+              </div>
             </div>
-          </div> <!-- This closes the card-panel -->
-        </div> <!-- this closes the row -->
+
+            <!-- second column -->
+            <div class="col s-max m4">
+              <div class="feature-points">
+                <h6>Features:</h6>
+                <ul class="feature-point">
+                  <li>#FEATURE_POINT</li>
+                </ul>
+              </div>
+              <div class="technologies">
+                <h6>Technologies:</h6>
+                <ul class="technology">
+                  <li>#TECHNOLOGY</li>
+                </ul>
+              </div>
+            </div> <!-- closes column -->
+          </div> <!-- closes row -->
+        </div> <!-- This closes the collapsible-body -->
+      </div>
+    </template>
+
+    <template id="contact-template">
+      <div id="close-modal">x</div>
+      <div class="template-container">
+        <div class="template-header">
+          <h5>Contact Form</h5>
+        </div>
+        <div class="template-row">
+          <input id="name" type="text" class="validate" placeholder="Name">
+        </div>
+        <div class="template-row">
+          <input id="email" type="text" class="validate" placeholder="Email">
+        </div>
+        <div class="template-row">
+          <textarea cols="16" rows="4" class="materialize-textarea" placeholder="Write to me here!" id="message" required></textarea>
+        </div>
+        <div class="template-row">
+          <button id="submit-info">
+            Submit
+          </button>
+        </div>
       </div> <!-- This closes the container -->
     </template>
 
 
-    <template id="about-me">
+    <template id="story-template">
+      <div id="close-modal">x</div>
       <div class="self">
         <div class="self-header">
           My Story
@@ -69,8 +136,16 @@
     </template>
 
     <script src="./lib/fabric.min.js"></script>
-    <script src="./template-strings.js"></script>
-    <script src="./project-data.js"></script>
-    <script src="./script.js"></script>
+    <script src="./util.js"></script>
+    <script src="./constants.js"></script>
+    <script src="./Image.js"></script>
+    <script src="./Enemy.js"></script>
+    <script src="./Bullet.js"></script>
+    <script src="./Ship.js"></script>
+    <script src="./Particle.js"></script>
+    <script src="./action.js"></script>
+    <script>
+      init();
+    </script>
   </body>
 </html>

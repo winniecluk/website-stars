@@ -15,20 +15,41 @@
         background-color: black;
       }
     </style>
-    <link rel="stylesheet" href="./dist/style.css" />
   <body>
-
+    <link rel="stylesheet" href="./dist/style.css" />
     <canvas id="star-system">
       <!-- content for browsers that do not support canvas -->
     </canvas>
     <div id="modal">
     </div>
 
+    <template id="header-template">
+      <div id="close-modal">x</div>
+    </template>
+
+    <template id="confirmation-template">
+      <div class="confirm-container">
+        <div id="confirmation">Your message has been submitted.</div>
+        <button id="close-modal">
+          OK
+        </button>
+      </div>
+    </template>
+
+
+    <template id="project-header-template">
+      <a name="top"></a>
+      <div class="project-header">
+        <a href="LINK_HREF">PROJECT_TITLE</a>
+      </div>
+    </template>
+
     <template id="project-template">
       <div>
-        <div class="header grey lighten-4">
-          PROJECT_TITLE (PROJECT_START_DATE - PROJECT_END_DATE)
-        </div>
+          <div class="header">
+            <a name="LINK_NAME">PROJECT_TITLE (PROJECT_START_DATE - PROJECT_END_DATE)</a>
+            <span class="top-arrow"><a href="#top">back to top</a></span>
+          </div>
         <div class="body">
           <div class="row">
             <div class="col s-min m3">
@@ -71,29 +92,31 @@
     </template>
 
     <template id="contact-template">
-      <div class="container">
-        <div class="row">
-          <div class="card-panel grey lighten-4">
-            <div id="contact-form">
-              <h5>Contact Form</h5>
-              <div class="input-field col s6">
-                <input id="name" type="text" class="validate">
-                <label for="name">Name</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="email" type="text" class="validate">
-                <label for="email" data-error="wrong">Email</label>
-              </div>
-              <textarea class="materialize-textarea" placeholder="Write to me here!" id="message" required></textarea>
-              <a class="waves-effect waves-light btn submit">Submit</a>
-            </div>
-          </div> <!-- This closes the card-panel -->
-        </div> <!-- this closes the row -->
+      <div id="close-modal">x</div>
+      <div class="template-container">
+        <div class="template-header">
+          <h5>Contact Form</h5>
+        </div>
+        <div class="template-row">
+          <input id="name" type="text" class="validate" placeholder="Name">
+        </div>
+        <div class="template-row">
+          <input id="email" type="text" class="validate" placeholder="Email">
+        </div>
+        <div class="template-row">
+          <textarea cols="16" rows="4" class="materialize-textarea" placeholder="Write to me here!" id="message" required></textarea>
+        </div>
+        <div class="template-row">
+          <button id="submit-info">
+            Submit
+          </button>
+        </div>
       </div> <!-- This closes the container -->
     </template>
 
 
     <template id="story-template">
+      <div id="close-modal">x</div>
       <div class="self">
         <div class="self-header">
           My Story
@@ -115,7 +138,6 @@
     </template>
 
     <script src="./lib/fabric.min.js"></script>
-
     <script src="./util.js"></script>
     <script src="./constants.js"></script>
     <script src="./Image.js"></script>

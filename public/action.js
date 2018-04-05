@@ -10,7 +10,6 @@ window.onresize = function(){
 function hideModal(){
   document.querySelector('#modal').innerHTML = '';
   document.querySelector('#modal').style = "height:0";
-  rerender();
 }
 
 function rerender(){
@@ -69,7 +68,7 @@ function init(){
     , { stroke: 'rgb(0,255,58)', strokeWidth: 5, selectable: false}
   );
 
-  var monstersArr = [monsterLeft, monsterCenter, monsterRight];
+  monstersArr = [monsterLeft, monsterCenter, monsterRight];
 
   renderMonsters(monstersArr);
   userShip.determineSize(w);
@@ -93,7 +92,11 @@ document.addEventListener('click', function(e){
   if (e.target.id === 'close-modal'){
     hideModal();
   }
+  if (e.target.id === 'submit-info'){
+    document.querySelector('#modal').innerHTML = document.querySelector('#confirmation-template').innerHTML;
+  }
 })
+
 
 function renderMonsters(monstersArr){
   monstersArr.forEach(function(monster){

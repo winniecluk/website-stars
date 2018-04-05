@@ -2,6 +2,10 @@ var randomNumber = (num) => {
   return Math.floor(Math.random() * num);
 }
 
+var randomFloat = (num) => {
+  return Math.random() * num;
+}
+
 function addNumbers(num1, num2){
   return num1 + num2;
 }
@@ -11,19 +15,29 @@ function subtractNumbers(num1, num2){
 }
 
 function showModal(option){
-  var closeStr = '<div id="close-modal">x</div>';
+  var headerStr = document.querySelector('#header-template').innerHTML;
   if (option === 'story'){
-    document.querySelector('#modal').innerHTML = closeStr + document.querySelector('#story-template').innerHTML;
+    document.querySelector('#modal').innerHTML = headerStr + document.querySelector('#story-template').innerHTML;
   }
   else if (option === 'projects'){
+    var projectHeaderStr = '<div class="project-header">' + replaceProjectHeader() + '</div>';
     var projectStr = replaceTemplate();
-    document.querySelector('#modal').innerHTML = closeStr + projectStr;
+    document.querySelector('#modal').innerHTML = headerStr + projectHeaderStr + projectStr;
   }
   else if (option === 'contact'){
-    document.querySelector('#modal').innerHTML = closeStr + document.querySelector('#contact-template').innerHTML;
+    document.querySelector('#modal').innerHTML = headerStr + document.querySelector('#contact-template').innerHTML;
   }
   document.querySelector('#modal').style = "height:80vh";
   document.querySelector('#close-modal').classList.remove('hidden');
+}
+
+function replaceProjectHeader(){
+  return projectData.map(project => {
+    var templateStr = document.querySelector('#project-header-template').content.querySelector('a').outerHTML + document.querySelector('#project-header-template').content.querySelector('a[href="LINK_HREF"]').outerHTML;
+    templateStr = templateStr.replace('LINK_HREF', project['LINK_HREF']);
+    templateStr = templateStr.replace('PROJECT_TITLE', project['PROJECT_TITLE']);
+    return templateStr;
+  }).join(' | ');
 }
 
 function replaceTemplate(){

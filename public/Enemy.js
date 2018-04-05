@@ -50,6 +50,7 @@ class Enemy extends Image {
   }
 
   createParticles(){
+    this.particles = [];
     var numParticles = this.scale.numParticles;
     var self = this;
     for (let i = 0; i < numParticles; i++){
@@ -85,14 +86,28 @@ class Enemy extends Image {
           particle.move(canvas);
         });
         canvas.renderAll();
-      }, 100);
+      }, 16);
       var timeoutId = window.setTimeout(function(){
         clearTimeout(intervalId);
         clearTimeout(timeoutId);
         showModal(self.option);
-      }, 1 * 300);
+      }, 1000);
+      var regenerateTimeoutId = window.setTimeout(function(){
+        self.restoreSelf(canvas);
+        clearTimeout(regenerateTimeoutId);
+      }, 2 * 1000);
       this.exploded = true;
     }
+  }
+
+  restoreSelf(canvas){
+    this.exploded = false;
+    this.particles.forEach(particle => {
+      canvas.remove(particle.fabricImage);
+    });
+    this.createParticles();
+    canvas.add(this.fabricImage);
+    canvas.sendToBack(this.fabricImage);
   }
 
 }

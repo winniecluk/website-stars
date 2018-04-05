@@ -1,5 +1,45 @@
 var projectData = [
   {
+    PROJECT_TITLE: 'Let\'s Go Metro'
+    , PROJECT_START_DATE: '06/30/17'
+    , PROJECT_END_DATE: '07/23/17'
+    , PROJECT_DESCRIPTION: 'A mobile application that notifies the user when her bus or train is leaving and arriving'
+    , IMAGE_HREF: './assets/images/screenshot-metro.png'
+    , PROJECT_HREF: 'https://github.com/winniecluk/letsGoMetro'
+    , APP_HREF: 'https://github.com/winniecluk/letsGoMetro'
+    , TEAM_MEMBERS: ['Carol Gonzalez', 'Winnie Luk', 'Valeriia Tischenko']
+    , FEATURE_POINTS: [
+        'Users can submit the address of their destination to get directions to their closest transit stop and the most expedient route and transfers.'
+        , 'They can see estimated departure and arrival times of each stop.'
+        , 'The application notifies them 5 minutes before the departure of each stop.'
+      ]
+    , TECH_POINTS: [
+      'React Native'
+      , 'React Native Maps'
+      , 'Node.js'
+      , 'InVision'
+    ]
+  }
+  , {
+    PROJECT_TITLE: 'Ballparq'
+    , PROJECT_START_DATE: '12/14/16'
+    , PROJECT_END_DATE: '01/12/17'
+    , PROJECT_DESCRIPTION: 'An interactive tool for startups to create financial models'
+    , IMAGE_HREF: './assets/images/screenshot-map.png'
+    , PROJECT_HREF: 'https://github.com/winniecluk/ballparq-example'
+    , APP_HREF: 'https://ballparq.herokuapp.com/#/particles'
+    , TEAM_MEMBERS: ['Andy Anderson', 'Clarissa Bitar', 'Troy Carson', 'Victoria Kurzweg', 'Winnie Luk']
+    , FEATURE_POINTS: [
+        'Users enter relevant data points to generate a financial model to present to potential investors in their startup.'
+        , 'They can adjust their inputs on sliders and receive a data visualization of their user retention and loss rate.'
+      ]
+    , TECH_POINTS: [
+      'AngularJS (1.5)'
+      , 'Canvas'
+      , 'Gulp'
+    ]
+  }
+  , {
     PROJECT_TITLE: 'ZO Map'
     , PROJECT_START_DATE: '10/31/16'
     , PROJECT_END_DATE: '11/04/16'

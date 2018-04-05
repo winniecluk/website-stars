@@ -34,8 +34,8 @@ class Particle extends Image {
   }
 
   determineSpeed(){
-    this.speed.x = randomNumber(12);
-    this.speed.y = randomNumber(12);
+    this.speed.x = randomFloat(0.8);
+    this.speed.y = randomFloat(0.8);
   }
 
   move(canvas){
@@ -45,7 +45,7 @@ class Particle extends Image {
       left: this.orientation.left,
       top: this.orientation.top
     });
-    this.speed.x = this.speed.x * 3;
+    this.speed.x = this.speed.x * 1.005;
   }
 
 }
