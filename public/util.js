@@ -73,6 +73,7 @@ var renderSelf = function(canvas, cb, cb2, cb3){
       .setPositionByOrigin(
         new fabric.Point(this.orientation.x, this.orientation.y), this.orientation.orientX, this.orientation.orientY
       );
+    i.set('selectable', false);
     this.fabricImage = i;
     canvas.add(i);
     canvas.sendToBack(i);

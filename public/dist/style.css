@@ -151,8 +151,8 @@ ul li {
   padding: 10px;
 }
 .self-picture img {
-  border-radius:50%;
-  width: 100%;
+  border-radius: 50%;
+  width: 80%;
 }
 .self-details {
   width: 57%;
