@@ -35,7 +35,7 @@ const enemyScale = {
     numParticles: 18,
     particleSize: 15,
     starSize: 2,
-    numStars: 10
+    numStars: 30
   },
   x_large: {
     img: 1,
@@ -43,7 +43,7 @@ const enemyScale = {
     numParticles: 18,
     particleSize: 15,
     starSize: 2,
-    numStars: 10
+    numStars: 30
   }
 };
 
