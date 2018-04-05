@@ -24,7 +24,16 @@ body {
 }
 
 #star-system {
-    border: 1px solid red;
+    // border: 1px solid red;
   // @include for-desktop-up {
   // }
+}
+
+div#modal {
+  display: none;
+  border: 1px solid red;
+  width: 98vw;
+  position: absolute;
+  top: 50vh;
+  background-color: white;
 }

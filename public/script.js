@@ -3,20 +3,23 @@ var w = document.documentElement.clientWidth - 10;
 var h = document.documentElement.clientHeight - 10;
 var imgScale;
 var subtitleSize;
+var particleSize;
+
 var imageObjs = [];
 var shipObj;
 var bottomLimit;
 var targetXLimits = [];
-var particleSize;
-var numberOfParticles = 30;
+var numberOfParticles = 15;
 var rects = [
   []
   , []
   , []
 ];
+var modal = document.getElementById('modal');
+var hitIndex;
 
 var randomNumber = () => {
-  return Math.random() * 15;
+  return Math.random() * 5;
 }
 
 var randomColors = [
@@ -26,17 +29,25 @@ var randomColors = [
 ];
 
 var directions = [
-  {left: '-', top: ''}
-  , {left: '-', top: '-'}
-  , {left: '', top: '-'}
+  {left: subtractNumbers, top: null}
+  , {left: subtractNumbers, top: subtractNumbers}
+  , {left: null, top: subtractNumbers}
 
-  , {left: '+', top: '-'}
-  , {left: '+', top: ''}
-  , {left: '+', top: '+'}
+  , {left: addNumbers, top: subtractNumbers}
+  , {left: addNumbers, top: null}
+  , {left: addNumbers, top: addNumbers}
 
-  , {left: '', top: '+'}
-  , {left: '-', top: '+'}
+  , {left: null, top: addNumbers}
+  , {left: subtractNumbers, top: addNumbers}
 ];
+
+function addNumbers(num1, num2){
+  return num1 + num2;
+}
+
+function subtractNumbers(num1, num2){
+  return num1 - num2;
+}
 
 function createRect(left, top, fillColor, width, height, index){
   var rect = new fabric.Rect({
@@ -54,11 +65,17 @@ function createRect(left, top, fillColor, width, height, index){
 function moveRect(rect){
   canvas.add(rect);
   var direction = rect.direction;
-  var factor = randomNumber();
-  var left = rect.get('left').toString();
-  var top = rect.get('top').toString();
-  var l = rect.direction.left ? eval(left + direction.left + factor) : left;
-  var t = rect.direction.top ? eval(top + direction.top + factor) : top;
+  if (!rect.topFactor) rect.topFactor = randomNumber();
+  if (!rect.leftFactor) rect.leftFactor = randomNumber();
+  // var factor = randomNumber();
+  var left = rect.get('left');
+  var top = rect.get('top');
+
+
+  // var l = rect.direction.left ? eval(left + direction.left + rect.leftFactor) : left;
+  // var t = rect.direction.top ? eval(top + direction.top + rect.topFactor) : top;
+  var l = rect.direction.left ? rect.direction.left(left, rect.leftFactor) : left;
+  var t = rect.direction.top ? rect.direction.top(top, rect.topFactor) : top;
   rect.set({
     left: l,
     top: t
@@ -107,7 +124,7 @@ function sizeWindow(){
       break;
     default:
       console.log('x-large');
-      imgScale = 0.2;
+      imgScale = 1;
       subtitleSize = 20;
       particleSize = 5;
   }
@@ -136,7 +153,7 @@ function renderImages(){
   });
 
   canvas.on('mouse:down', function(e){
-    if (shipObj){
+    if (shipObj.fabricImage){
       var y = shipObj.get('top');
       var x = e.e.clientX;
       var startPoints = [
@@ -153,12 +170,12 @@ function renderImages(){
       fabric.util.animate({
         startValue: startPoints[0].y,
         endValue: 0,
-        duration: 1 * 1000,
+        duration: 1.5 * 1000,
         onChange: function(value){
           polyline.setPositionByOrigin(new fabric.Point(x, value), 'center', 'bottom');
           var betweenX = false;
           var hitShip;
-          var hitIndex;
+          // var hitIndex;
           for (let i = 0; i < targetXLimits.length; i++){
             if (x >= targetXLimits[i].left
               && x <= targetXLimits[i].right
@@ -182,12 +199,20 @@ function renderImages(){
         onComplete: function(){
           console.log('complete');
           // open modal
+          document.querySelector('#modal').style = "height:80vh";
+
+          var arrHtmlStr = renderTemplateContent(projectData, projectStr);
+
+          console.log(arrHtmlStr);
+          document.querySelector('#modal').innerHTML = arrHtmlStr.join('');
+
+          // var t = document.querySelector('#projects');
+          // var clone = document.importNode(t.content, true);
+          // document.querySelector('#modal').appendChild(clone);
         }
       });
     }
   });
-
-
 
   setImage({
     name: 'ship'
@@ -269,7 +294,7 @@ function setImage(obj){
           resolve({val: val, rc: rc});
         }).then(function(o){
           createRect(obj.posX, o.val, o.rc, particleSize, particleSize, obj.idx);
-        })
+        });
       }
     }
     if (obj.text){
